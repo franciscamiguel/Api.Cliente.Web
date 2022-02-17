@@ -10,7 +10,6 @@ namespace Api.Client.Web.Entidades
         public string CPF { get; set; }
         public string RG { get; set; }
 
-        public int EnderecoId { get; set; }
         public List<Endereco> Enderecos { get; set; }
     }
 }

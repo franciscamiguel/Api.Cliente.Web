@@ -1,16 +1,11 @@
+using Api.Client.Web.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Client.Web
 {
@@ -26,17 +21,37 @@ namespace Api.Client.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /// <summary>
+            /// Injeção de Dependêncica
+            /// </summary>
+            /// <param name="("DefaultConnection")"></param>
+            /// <typeparam name="DataContext"></typeparam>
+            /// <returns></returns>
+            services.AddDbContext<DataContext>(d => d.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            /// <summary>
+            /// Injeção de Dependência do Repository
+            /// </summary>
+            /// <typeparam name="IRepositorio"></typeparam>
+            /// <typeparam name="Repositorio"></typeparam>
+            /// <returns></returns>
+            services.AddScoped<IRepositorio, Repositorio>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api.Client.Web", Version = "v1" });
             });
+
+            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
         {
+            context.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,6 +69,9 @@ namespace Api.Client.Web
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
         }
     }
 }
