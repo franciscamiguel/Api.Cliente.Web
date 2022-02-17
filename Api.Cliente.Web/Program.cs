@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Cliente.Web
+namespace Api.Client.Web
 {
     public class Program
     {

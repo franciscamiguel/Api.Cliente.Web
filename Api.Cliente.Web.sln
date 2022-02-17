@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Cliente.Web", "Api.Cliente.Web\Api.Cliente.Web.csproj", "{43A2E8D1-45F1-4C37-972E-12D1FADCB899}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Client.Web", "Api.Cliente.Web\Api.Client.Web.csproj", "{43A2E8D1-45F1-4C37-972E-12D1FADCB899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

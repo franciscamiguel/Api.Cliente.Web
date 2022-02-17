@@ -1,4 +1,4 @@
-﻿namespace Api.Cliente.Web.Entidades
+﻿namespace Api.Client.Web.Entidades
 {
     public class Endereco
     {
